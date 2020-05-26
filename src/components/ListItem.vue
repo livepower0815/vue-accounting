@@ -2,14 +2,14 @@
   <div class="list-item">
     <div class="detail">
       <div class="detail-date">
-        2020/08/08
+        {{ detail.date }}
       </div>
       <div class="detail-cost">
-        NT$ 1000
+        NT$ {{ detail.cost }}
       </div>
     </div>
     <div class="content">
-      這是一般收入 賺很多很多很多很多很多錢
+      {{ detail.costTitle }}
     </div>
   </div>
 </template>
@@ -17,6 +17,14 @@
 <script>
 export default {
   name: 'ListItem',
+  props: {
+    detail: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  },
   data() {
     return {
 

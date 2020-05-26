@@ -1,14 +1,15 @@
 <template>
   <div class="selector-container">
     <span @click="show = true">
-      2020/06/08
+      {{ value }}
     </span>
     <div class="selector-icon">
       <van-icon name="calender-o" color="rgb(145, 142, 142)" size="17px" />
     </div>
     <van-calendar
       v-model="show"
-      color="#1989fa" 
+      color="#1989fa"
+      :default-date="defaultDate"
       :min-date="minDate"
       :max-date="maxDate"
       @confirm="onConfirm"
@@ -33,6 +34,11 @@ export default {
     prop: 'value', // 绑定的值，通过父组件传递
     event: 'change' // 自定义时间名
   },
+  computed: {
+    defaultDate() {
+      return new Date(this.value)
+    }
+  },
   data() {
     return {
       show: false,
@@ -42,8 +48,7 @@ export default {
   },
   methods: {
     onConfirm(val) {
-      console.log('onConfirm::::', moment(val).format('YYYY/MM/DD'))
-      // this.$emit('change', )
+      this.$emit('change', moment(val).format('YYYY/MM/DD'))
       this.show = false
     }
   }
