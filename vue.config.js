@@ -1,4 +1,4 @@
 module.exports = {
-  // publicPath: '/vue-accounting/dist/',
+  publicPath: '/vue-accounting/dist/',
   lintOnSave: false,
 };
