@@ -4,11 +4,11 @@
       <div class="detail-date">
         {{ detail.date }}
       </div>
-      <div class="detail-cost">
+      <div class="detail-cost" :class="{'green': detail.Income === 'in'}">
         NT$ {{ detail.cost }}
       </div>
     </div>
-    <div class="content">
+    <div class="content" :class="{'green': detail.Income === 'in'}">
       {{ detail.costTitle }}
     </div>
   </div>
@@ -56,6 +56,10 @@ export default {
     &-cost {
       font-weight: 500;
     }
+  }
+
+  .green {
+    color: green;
   }
 }
 </style>
