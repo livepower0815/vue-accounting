@@ -1,10 +1,10 @@
 <template>
   <div class="list-item">
     <div class="detail">
-      <div class="detail-date">
+      <div class="detail-date" @click="$emit('openDelete', detail)">
         {{ detail.date }}
       </div>
-      <div class="detail-cost" :class="{'green': detail.Income === 'in'}">
+      <div class="detail-cost" :class="{'green': detail.Income === 'in'}" @click="$emit('openEdit', detail)">
         NT$ {{ detail.cost }}
       </div>
     </div>
@@ -35,13 +35,14 @@ export default {
 
 <style lang="scss" scoped>
 .list-item {
-  padding: 10px;
+  padding: 7px;
   border-top: 2px rgb(167, 167, 167) solid;
   border-bottom: 2px rgb(167, 167, 167) solid;
 
   .content {
-    line-height: 30px;
+    line-height: 20px;
     font-weight: 500;
+    font-size: 16px;
   }
 
   .detail {

@@ -5,11 +5,15 @@
         <th>總支出</th>
         <th>總收入</th>
         <th>合計</th>
+        <th>新增</th>
       </thead>
       <tbody>
         <td>{{ total.outTotal }}</td>
         <td>{{ total.inTotal }}</td>
         <td>{{ total.total }}</td>
+        <td>
+          <van-icon name="add-o" size="25px" @click="$emit('openAdd')" />
+        </td>
       </tbody>
     </table>
   </div>

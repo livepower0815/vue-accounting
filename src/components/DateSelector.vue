@@ -12,6 +12,7 @@
       :default-date="defaultDate"
       :min-date="minDate"
       :max-date="maxDate"
+      :get-container="getContainer"
       @confirm="onConfirm"
     />
   </div>
@@ -50,6 +51,10 @@ export default {
     onConfirm(val) {
       this.$emit('change', moment(val).format('YYYY/MM/DD'))
       this.show = false
+    },
+    // 返回一个特定的 DOM 节点，作为挂载的父节点
+    getContainer() {
+      return document.querySelector('#app');
     }
   }
 }
