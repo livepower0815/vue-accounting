@@ -12,7 +12,8 @@ import {
   Field,
   CheckboxGroup,
   Checkbox,
-  Toast
+  Toast,
+  Loading
 } from 'vant'
 
 Vue.use(Button)
@@ -28,3 +29,4 @@ Vue.use(Field)
 Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
 Vue.use(Toast)
+Vue.use(Loading)

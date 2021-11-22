@@ -5,15 +5,15 @@
         <th>總支出</th>
         <th>總收入</th>
         <th>合計</th>
-        <th>新增</th>
+        <!-- <th>新增</th> -->
       </thead>
       <tbody>
         <td>{{ total.outTotal }}</td>
         <td>{{ total.inTotal }}</td>
         <td>{{ total.total }}</td>
-        <td>
+        <!-- <td>
           <van-icon name="add-o" size="25px" @click="$emit('openAdd')" />
-        </td>
+        </td> -->
       </tbody>
     </table>
   </div>
@@ -41,16 +41,20 @@ export default {
 <style lang="scss">
 .home-footer {
   // height: 50px;
+  border-top: 2px #d9e7f4 solid;
 
   .ac-table {
     width: 100%;
 
     th, td {
-      height: 30px;
+      height: 26px;
+      font-size: 18px;
+      color: #555555;
     }
 
     td {
       text-align: center;
+      font-weight: bold;
     }
   }
 }

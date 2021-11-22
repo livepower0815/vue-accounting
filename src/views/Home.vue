@@ -12,13 +12,17 @@
         <!-- <div class="ac-button">
           <van-icon name="search" color="white" size="17px" />
         </div> -->
+        <van-icon style="margin-left: 20px;" name="add-o" size="30px" color="#1989fa" @click="openAdd" />
       </div>
     </div>
 
-    <div class="home-content">
+    <div v-if="!isLoading" class="home-content">
       <template v-for="(item, index) in filterList">
         <ListItem :key="index" :detail="item" @openEdit="openEdit" @openDelete="openDelete" />
       </template>
+    </div>
+    <div v-else class="home-loading">
+      <van-loading color="#0094ff" size="50" />
     </div>
 
     <HomeFooter :total="computeTotal" @openAdd="openAdd" />
@@ -77,6 +81,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       tabActived: 'shared',
       dateRange: [
         moment().subtract(1, 'month').format('YYYY/MM/DD'),
@@ -161,8 +166,10 @@ export default {
   methods: {
     // 取得完整 list
     getData() {
+      this.isLoading = true
       db.ref('accountingList').once('value').then(res => {
         this.listData = this.setData(res.val())
+        this.isLoading = false
       })
     },
     // 設定資料並過濾
@@ -241,14 +248,24 @@ export default {
 .home {
   display: flex;
   flex-direction: column;
-  height: 100%
+  height: 100%;
+  &-header {
+    border-bottom: 1px #d9e7f4 solid;
+  }
+
+  &-loading {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .date-selector {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 10px;
 }
 
 .home-content {

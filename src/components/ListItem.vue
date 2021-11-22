@@ -36,8 +36,7 @@ export default {
 <style lang="scss" scoped>
 .list-item {
   padding: 7px;
-  border-top: 2px rgb(167, 167, 167) solid;
-  border-bottom: 2px rgb(167, 167, 167) solid;
+  border-top: 2px #d9e7f4 solid;
 
   .content {
     line-height: 20px;
