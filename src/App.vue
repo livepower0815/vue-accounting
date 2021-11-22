@@ -29,7 +29,7 @@ export default {
   box-sizing: border-box;
 
   &.is-ios {
-    padding-bottom: 120px;
+    padding-bottom: 80px;
   }
 }
 
