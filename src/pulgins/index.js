@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 import { 
   Button,
   Tabbar,
@@ -13,8 +14,14 @@ import {
   CheckboxGroup,
   Checkbox,
   Toast,
-  Loading
+  Loading,
+  Locale
 } from 'vant'
+
+// 引入英文语言包
+import zhTW from 'vant/es/locale/lang/zh-TW';
+
+Locale.use('zh-TW', zhTW);
 
 Vue.use(Button)
 Vue.use(Tabbar)
