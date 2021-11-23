@@ -12,7 +12,6 @@
 export default {
   computed: {
     IsIPhone() {
-      // test
       return window.navigator.userAgent.includes('iPhone')
     }
   }
