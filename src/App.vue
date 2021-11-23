@@ -28,7 +28,7 @@ export default {
   height: 100vh;
   padding-bottom: 80px;
   box-sizing: border-box;
-
+  background-color: #ffedf1;
   &.is-ios {
     padding-bottom: 120px;
   }
@@ -42,7 +42,7 @@ export default {
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #1989fa;
+      color: #ed72c9;
     }
   }
 }

@@ -8,7 +8,8 @@
     </div>
     <van-calendar
       v-model="show"
-      color="#1989fa"
+      color="#e87373"
+      style="max-width: 500px;"
       :default-date="defaultDate"
       :min-date="minDate"
       :max-date="maxDate"
@@ -54,7 +55,7 @@ export default {
     },
     // 返回一个特定的 DOM 节点，作为挂载的父节点
     getContainer() {
-      return document.querySelector('#app');
+      return document.querySelector('.home');
     }
   }
 }
@@ -63,6 +64,7 @@ export default {
 <style lang="scss" scoped>
 .selector-container {
   border-radius: 4px;
+  background-color: #ffffff;
   border: 1px #cecbcb solid;
   display: inline-block;
   font-size: 14px;

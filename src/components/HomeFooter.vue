@@ -41,7 +41,8 @@ export default {
 <style lang="scss">
 .home-footer {
   // height: 50px;
-  border-top: 2px #d9e7f4 solid;
+  border-top: 2px #ecd5e6 solid;
+  background-color: #ff8ca7;
 
   .ac-table {
     width: 100%;
@@ -49,7 +50,7 @@ export default {
     th, td {
       height: 26px;
       font-size: 18px;
-      color: #555555;
+      color: #ffffff;
     }
 
     td {

@@ -1,5 +1,12 @@
 <template>
-  <van-tabbar class="ac-tabbar" :fixed="false" v-model="active">
+  <van-tabbar
+    style="background-color: #ff8ca7"
+    class="ac-tabbar"
+    active-color="#ffffff"
+    inactive-color="#ffffff"
+    :fixed="false"
+    v-model="active"
+  >
     <van-tabbar-item icon="friends-o">共用</van-tabbar-item>
     <van-tabbar-item icon="flower-o">老婆</van-tabbar-item>
     <van-tabbar-item icon="contact">老公</van-tabbar-item>
@@ -23,7 +30,7 @@ export default {
   computed: {
     active: {
       get(val) {
-        return tabValurMap.findIndex(item => item === this.value)
+        return tabValurMap.findIndex((item) => item === this.value)
       },
       set(val) {
         this.$emit('change', tabValurMap[val])
@@ -35,11 +42,10 @@ export default {
 
 <style lang="scss" scoped>
 .ac-tabbar {
-  & /deep/ { 
+  & /deep/ {
     .van-icon {
-      font-size: 25px; 
+      font-size: 25px;
     }
   }
-  
 }
 </style>

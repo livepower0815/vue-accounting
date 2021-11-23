@@ -12,7 +12,7 @@
         <!-- <div class="ac-button">
           <van-icon name="search" color="white" size="17px" />
         </div> -->
-        <van-icon style="margin-left: 20px;" name="add-o" size="30px" color="#1989fa" @click="openAdd" />
+        <van-icon style="margin-left: 20px;" name="add-o" size="30px" color="#ffffff" @click="openAdd" />
       </div>
     </div>
 
@@ -22,7 +22,7 @@
       </template>
     </div>
     <div v-else class="home-loading">
-      <van-loading color="#0094ff" size="50" />
+      <van-loading color="#eb51db" size="50" />
     </div>
 
     <HomeFooter :total="computeTotal" @openAdd="openAdd" />
@@ -249,8 +249,15 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  border: 2px #ffffff solid;
+  box-sizing: border-box;
+  background-color: #ffffff;
   &-header {
-    border-bottom: 1px #d9e7f4 solid;
+    border-bottom: 1px #dddddd solid;
+    background-color: #ff8ca7;
+    // color: #ee4f7c;
   }
 
   &-loading {
@@ -278,7 +285,7 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 8px;
-    background: #1989fa;
+    background: #ed72c9;
     width: 20px;
     height: 20px;
     border-radius: 50%;
