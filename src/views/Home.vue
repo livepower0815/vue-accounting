@@ -46,7 +46,13 @@
         <van-field v-model="formData.costTitle" label="項目名稱" placeholder="消費項目" />
       </van-cell-group>
       <van-cell-group>
-        <van-field v-model="formData.cost" type="digit" label="金額" placeholder="消費金額" :formatter="numberFormatter" />
+        <van-field
+          v-model="formData.cost"
+          type="digit"
+          label="金額"
+          placeholder="消費金額"
+          :formatter="numberFormatter"
+        />
       </van-cell-group>
       <van-cell-group>
         <van-field label="收入支出">
@@ -68,7 +74,9 @@ import SelectButtons from '@/components/SelectButtons'
 import moment from 'moment'
 import { db } from '@/utils/firebase.js'
 
-const getTime = (date) => { return new Date(date).getTime() }
+const getTime = (date) => {
+  return new Date(date).getTime()
+}
 
 export default {
   name: 'Home',
@@ -84,7 +92,9 @@ export default {
       isLoading: false,
       tabActived: 'shared',
       dateRange: [
-        moment().subtract(1, 'month').format('YYYY/MM/DD'),
+        moment()
+          .subtract(1, 'month')
+          .format('YYYY/MM/DD'),
         moment().format('YYYY/MM/DD')
       ],
       listData: [],
@@ -107,46 +117,59 @@ export default {
         key: ''
       },
       belongBtns: [
-        {name: '共用', val: 'shared'},
-        {name: '老婆', val: 'wife'},
-        {name: '老公', val: 'husband'}
+        { name: '共用', val: 'shared' },
+        { name: '老婆', val: 'wife' },
+        { name: '老公', val: 'husband' }
       ],
       incomeBtns: [
-        {name: '支出', val: 'out'},
-        {name: '收入', val: 'in'}
-      ],
+        { name: '支出', val: 'out' },
+        { name: '收入', val: 'in' }
+      ]
     }
   },
   computed: {
     // 過濾日期區間與歸屬
     filterList() {
-      return this.listData.filter(item => {
+      return this.listData.filter((item) => {
+        const isTimeRange = getTime(item.date) >= getTime(this.dateRange[0]) && getTime(item.date) <= getTime(this.dateRange[1])
+        if (this.tabActived === 'all') {
+          return isTimeRange
+        }
         return (
-          getTime(item.date) >= getTime(this.dateRange[0]) &&
-          getTime(item.date) <= getTime(this.dateRange[1]) &&
+          isTimeRange &&
           item.belong === this.tabActived
         )
       })
     },
     // 計算總支出收入合計
     computeTotal() {
-      const outTotalMap = this.filterList.filter(item => item.Income === 'out').map(item => item.cost)
-      const inTotalMap = this.filterList.filter(item => item.Income === 'in').map(item => item.cost)
-      let outTotal = outTotalMap.length !== 0 ? outTotalMap.reduce((a,b) => {return  a + b}) : 0
-      let inTotal = inTotalMap.length !== 0 ? inTotalMap.reduce((a,b) => {return  a + b}) : 0
-      return {outTotal, inTotal, total: outTotal - inTotal}
+      const outTotalMap = this.filterList.filter((item) => item.Income === 'out').map((item) => item.cost)
+      const inTotalMap = this.filterList.filter((item) => item.Income === 'in').map((item) => item.cost)
+      let outTotal =
+        outTotalMap.length !== 0
+          ? outTotalMap.reduce((a, b) => {
+              return a + b
+            })
+          : 0
+      let inTotal =
+        inTotalMap.length !== 0
+          ? inTotalMap.reduce((a, b) => {
+              return a + b
+            })
+          : 0
+      return { outTotal, inTotal, total: outTotal - inTotal }
     },
     dialogTitle() {
       switch (this.dialogType) {
         case 'add':
           return '新增紀錄'
-          break;
+          break
         case 'edit':
           return '編輯紀錄'
-          break;
+          break
         default:
           return '請確認彈窗型別'
-          break;
+          break
       }
     }
   },
@@ -167,72 +190,87 @@ export default {
     // 取得完整 list
     getData() {
       this.isLoading = true
-      db.ref('accountingList').once('value').then(res => {
-        this.listData = this.setData(res.val())
-        this.isLoading = false
-      })
+      db.ref('accountingList')
+        .once('value')
+        .then((res) => {
+          this.listData = this.setData(res.val())
+          this.isLoading = false
+        })
     },
     // 設定資料並過濾
     setData(data) {
-      return Object.keys(data).map(key => {return {...data[key], key}}).sort((a, b) => {
-        return getTime(a.date) < getTime(b.date) ? 1 : -1
-      })
+      return Object.keys(data)
+        .map((key) => {
+          return { ...data[key], key }
+        })
+        .sort((a, b) => {
+          return getTime(a.date) < getTime(b.date) ? 1 : -1
+        })
     },
     // 開啟新增彈窗
     openAdd() {
       this.formDataDefault.belong = this.tabActived
-      this.formData = {...this.formDataDefault}
+      this.formData = { ...this.formDataDefault }
       this.dialogType = 'add'
       this.dialogShow = true
     },
     // 開啟編輯彈窗
     openEdit(itemData) {
-      this.formData = {...itemData}
+      this.formData = { ...itemData }
       this.dialogType = 'edit'
       this.dialogShow = true
     },
     // 開啟刪除彈窗
     openDelete(itemData) {
-      this.$dialog.confirm({
-        title: '刪除確認',
-        message: `確定要刪除 ${itemData.costTitle}`,
-      }).then(() => {
-        db.ref('accountingList').child(itemData.key).remove()
-          .then(() => {
-            this.$toast({message: 'succeeded', icon: 'success'})
-            this.getData()
-          })
-          .catch((error) => {
-            console.error("failed: " + error.message)
-            this.$toast({message: 'failed', icon: 'cross'})
-          })
-      }).catch(() => {
-        console.log('取消')
-      })
+      this.$dialog
+        .confirm({
+          title: '刪除確認',
+          message: `確定要刪除 ${itemData.costTitle}`
+        })
+        .then(() => {
+          db.ref('accountingList')
+            .child(itemData.key)
+            .remove()
+            .then(() => {
+              this.$toast({ message: 'succeeded', icon: 'success' })
+              this.getData()
+            })
+            .catch((error) => {
+              console.error('failed: ' + error.message)
+              this.$toast({ message: 'failed', icon: 'cross' })
+            })
+        })
+        .catch(() => {
+          console.log('取消')
+        })
     },
     // 確認送出新增編輯
     dialogConfirm() {
       console.log(this.formData)
       if (this.dialogType === 'add') {
-        db.ref('accountingList').push().set({...this.formData})
+        db.ref('accountingList')
+          .push()
+          .set({ ...this.formData })
           .then(() => {
-            this.$toast({message: 'succeeded', icon: 'success'})
+            this.$toast({ message: 'succeeded', icon: 'success' })
             this.getData()
           })
           .catch((error) => {
-            console.error("failed: " + error.message)
+            console.error('failed: ' + error.message)
             this.$toast('failed')
-            this.$toast({message: 'failed', icon: 'cross'})
+            this.$toast({ message: 'failed', icon: 'cross' })
           })
       } else if (this.dialogType === 'edit') {
-        db.ref('accountingList').child(this.formData.key).set({...this.formData})
+        db.ref('accountingList')
+          .child(this.formData.key)
+          .set({ ...this.formData })
           .then(() => {
-            this.$toast({message: 'succeeded', icon: 'success'})
+            this.$toast({ message: 'succeeded', icon: 'success' })
             this.getData()
           })
           .catch((error) => {
-            console.error("failed: " + error.message)
-            this.$toast({message: 'failed', icon: 'cross'})
+            console.error('failed: ' + error.message)
+            this.$toast({ message: 'failed', icon: 'cross' })
           })
       }
     },
@@ -241,7 +279,7 @@ export default {
       return Number(value)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -278,7 +316,7 @@ export default {
 .home-content {
   // display: flex;
   flex: 1;
-  overflow-y: auto;;
+  overflow-y: auto;
 
   .ac-button {
     display: flex;
@@ -292,5 +330,4 @@ export default {
     margin-left: 10px;
   }
 }
-
 </style>
