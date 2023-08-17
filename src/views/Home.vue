@@ -18,7 +18,7 @@
 
     <div v-if="!isLoading" class="home-content">
       <template v-for="(item, index) in filterList">
-        <ListItem :key="index" :detail="item" @openEdit="openEdit" @openDelete="openDelete" />
+        <ListItem :key="index" :detail="item" :isAll="isAll" @openEdit="openEdit" @openDelete="openDelete" />
       </template>
     </div>
     <div v-else class="home-loading">
@@ -171,6 +171,9 @@ export default {
           return '請確認彈窗型別'
           break
       }
+    },
+    isAll() {
+      return this.tabActived === 'all'
     }
   },
   watch: {
