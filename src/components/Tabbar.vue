@@ -1,6 +1,6 @@
 <template>
   <van-tabbar
-    style="background-color: #ff8ca7"
+    style="background-color: #27acb3"
     class="ac-tabbar"
     active-color="#ffffff"
     inactive-color="#ffffff"

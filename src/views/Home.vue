@@ -295,9 +295,11 @@ export default {
   border: 2px #ffffff solid;
   box-sizing: border-box;
   background-color: #ffffff;
+  box-shadow: 0 10px 20px rgba(125, 136, 152, 0.95);
+
   &-header {
     border-bottom: 1px #dddddd solid;
-    background-color: #ff8ca7;
+    background-color: #27acb3;
     // color: #ee4f7c;
   }
 

@@ -28,7 +28,7 @@ export default {
   height: 100vh;
   padding-bottom: 80px;
   box-sizing: border-box;
-  background-color: #ffedf1;
+  background-color: #e8f5f1;
   &.is-ios {
     padding-bottom: 120px;
   }

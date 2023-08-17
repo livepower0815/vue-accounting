@@ -42,7 +42,7 @@ export default {
 .home-footer {
   // height: 50px;
   border-top: 2px #ecd5e6 solid;
-  background-color: #ff8ca7;
+  background-color: #27acb3;
 
   .ac-table {
     width: 100%;
