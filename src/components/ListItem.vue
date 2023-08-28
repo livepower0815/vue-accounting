@@ -3,7 +3,7 @@
     <div class="detail">
       <div class="detail-date" @click="$emit('openDelete', detail)">
         {{ detail.date }}
-        <span v-if="isAll" :class="[tabMap[detail.belong].color, 'tab']">{{ tabMap[detail.belong].name }}</span>
+        <span :class="[tabMap[detail.belong].color, 'tab']">{{ tabMap[detail.belong].name }}</span>
       </div>
       <div class="detail-cost" :class="{'green': detail.Income === 'in'}" @click="$emit('openEdit', detail)">
         NT$ {{ detail.cost }}
